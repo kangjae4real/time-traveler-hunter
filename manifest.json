@@ -3,9 +3,21 @@
   "name": "Time Traveler Hunter",
   "description": "Hide repetitive year-play comments on YouTube.",
   "version": "0.2.0",
+  "icons": {
+    "16": "assets/logo.png",
+    "32": "assets/logo.png",
+    "48": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
   "permissions": ["storage", "tabs"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/logo.png",
+      "32": "assets/logo.png",
+      "48": "assets/logo.png",
+      "128": "assets/logo.png"
+    }
   },
   "content_scripts": [
     {

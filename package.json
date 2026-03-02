@@ -8,7 +8,7 @@
     "test": "bun test",
     "fix:imports": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\" --fix",
     "lint": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\"",
-    "build": "bun run fix:imports && bun run lint && rm -rf dist && mkdir -p dist && bun build ./src/content-script.ts --outfile ./dist/content-script.js --target browser && bun build ./src/popup-script.ts --outfile ./dist/popup-script.js --target browser && cp manifest.json dist/manifest.json && cp popup.html dist/popup.html",
+    "build": "bun run fix:imports && bun run lint && rm -rf dist && mkdir -p dist && bun build ./src/content-script.ts --outfile ./dist/content-script.js --target browser && bun build ./src/popup-script.ts --outfile ./dist/popup-script.js --target browser && cp manifest.json dist/manifest.json && cp popup.html dist/popup.html && cp -R assets dist/assets",
     "prepare": "husky"
   },
   "devDependencies": {
