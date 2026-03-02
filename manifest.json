@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Time Traveler Hunter",
-  "description": "Hide repetitive year-play comments on YouTube.",
-  "version": "0.2.0",
+  "name": "Time Traveler Hunter(날짜 놀이/출석 체크 댓글 제거)",
+  "description": "유튜브 댓글 내 날짜 놀이, 출석 체크 댓글을 숨김 처리하는 Extension",
+  "version": "1.0.0",
   "icons": {
     "16": "assets/logo.png",
     "32": "assets/logo.png",
