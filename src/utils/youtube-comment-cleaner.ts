@@ -2,12 +2,11 @@ import type { CommentFilterSettings } from '@/utils/comment-filter-settings';
 import { isDatePlayComment } from '@/utils/date-play-detector';
 import { debugLog } from '@/utils/debug-logger';
 
-const COMMENT_TEXT_SELECTOR =
-  '#content-text, yt-formatted-string#content-text, .comment-content, .comment-text';
+const COMMENT_TEXT_SELECTOR = '#content-text, yt-formatted-string#content-text, .comment-content, .comment-text';
 const REPLACED_COMMENT_ATTR = 'data-time-traveler-replaced';
 const REPLACED_TEXT_CLASS_NAME = 'time-traveler-hunter-replaced-text';
 const STYLE_ELEMENT_ID = 'time-traveler-hunter-style';
-const REPLACEMENT_TEXT = '확장프로그램에 의해 숨김처리됨.';
+const REPLACEMENT_TEXT = '[TIME TRAVELER HUNTER] 확장프로그램에 의해 숨김처리됨.';
 
 const originalCommentTextMap = new WeakMap<HTMLElement, string>();
 
@@ -72,10 +71,7 @@ function restoreCommentTextIfNeeded(commentTextElement: HTMLElement): void {
   commentTextElement.removeAttribute(REPLACED_COMMENT_ATTR);
 }
 
-function processCommentTextElement(
-  commentTextElement: HTMLElement,
-  settings: CommentFilterSettings,
-): boolean {
+function processCommentTextElement(commentTextElement: HTMLElement, settings: CommentFilterSettings): boolean {
   const commentText = getSourceCommentText(commentTextElement);
   const shouldHide = isDatePlayComment(commentText, settings);
 
@@ -88,10 +84,7 @@ function processCommentTextElement(
   return false;
 }
 
-function processCommentTextList(
-  commentTextList: HTMLElement[],
-  settings: CommentFilterSettings,
-): ProcessSummary {
+function processCommentTextList(commentTextList: HTMLElement[], settings: CommentFilterSettings): ProcessSummary {
   let hiddenCount = 0;
 
   for (const commentTextElement of commentTextList) {
@@ -119,9 +112,7 @@ function toCommentTextElementList(elementList: NodeListOf<Element>): HTMLElement
 }
 
 function processAllCommentTexts(settings: CommentFilterSettings): ProcessSummary {
-  const commentTextElementList = toCommentTextElementList(
-    document.querySelectorAll(COMMENT_TEXT_SELECTOR),
-  );
+  const commentTextElementList = toCommentTextElementList(document.querySelectorAll(COMMENT_TEXT_SELECTOR));
 
   return processCommentTextList(commentTextElementList, settings);
 }
@@ -137,27 +128,19 @@ function collectCommentTextElementsFromNode(node: Node): HTMLElement[] {
     commentTextElementList.push(node);
   }
 
-  const nestedTextElements = toCommentTextElementList(
-    node.querySelectorAll(COMMENT_TEXT_SELECTOR),
-  );
+  const nestedTextElements = toCommentTextElementList(node.querySelectorAll(COMMENT_TEXT_SELECTOR));
   commentTextElementList.push(...nestedTextElements);
 
   return commentTextElementList;
 }
 
-function processAddedNode(
-  node: Node,
-  settings: CommentFilterSettings,
-): ProcessSummary {
+function processAddedNode(node: Node, settings: CommentFilterSettings): ProcessSummary {
   const commentTextElementList = collectCommentTextElementsFromNode(node);
 
   return processCommentTextList(commentTextElementList, settings);
 }
 
-function handleMutations(
-  mutations: MutationRecord[],
-  settings: CommentFilterSettings,
-): void {
+function handleMutations(mutations: MutationRecord[], settings: CommentFilterSettings): void {
   for (const mutation of mutations) {
     for (const addedNode of mutation.addedNodes) {
       processAddedNode(addedNode, settings);
@@ -169,9 +152,7 @@ function logScanSummary(context: string, summary: ProcessSummary): void {
   debugLog(`${context} scanned=${summary.totalCount}, hidden=${summary.hiddenCount}`);
 }
 
-export function startYouTubeCommentCleaner(
-  initialSettings: CommentFilterSettings,
-): YouTubeCommentCleanerController {
+export function startYouTubeCommentCleaner(initialSettings: CommentFilterSettings): YouTubeCommentCleanerController {
   let currentSettings: CommentFilterSettings = initialSettings;
 
   function getCurrentSettings(): CommentFilterSettings {
