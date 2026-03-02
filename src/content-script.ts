@@ -2,6 +2,7 @@ import {
   getCommentFilterSettings,
   type CommentFilterSettings,
 } from '@/utils/comment-filter-settings';
+import { debugLog } from '@/utils/debug-logger';
 import { isUpdateFilterSettingsMessage } from '@/utils/filter-settings-message';
 import {
   startYouTubeCommentCleaner,
@@ -34,7 +35,7 @@ async function runCleanerWithConfiguredSettings(): Promise<void> {
   const storedSettings = await getCommentFilterSettings();
   const settingsToApply = pendingSettings ?? storedSettings;
 
-  console.warn('[Time Traveler Hunter] loaded settings:', settingsToApply);
+  debugLog('loaded settings', settingsToApply);
   startCleanerIfNeeded(settingsToApply);
   pendingSettings = null;
 }
@@ -60,7 +61,7 @@ function handleDomContentLoaded(): void {
 }
 
 function bootstrapCommentCleaner(): void {
-  console.warn('[Time Traveler Hunter] content script started:', window.location.href);
+  debugLog('content script started', window.location.href);
   registerRuntimeMessageListener();
 
   if (document.readyState === 'loading') {

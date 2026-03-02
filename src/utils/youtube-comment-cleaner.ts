@@ -1,5 +1,6 @@
 import type { CommentFilterSettings } from '@/utils/comment-filter-settings';
 import { isDatePlayComment } from '@/utils/date-play-detector';
+import { debugLog } from '@/utils/debug-logger';
 
 const COMMENT_TEXT_SELECTOR =
   '#content-text, yt-formatted-string#content-text, .comment-content, .comment-text';
@@ -49,7 +50,7 @@ function replaceCommentText(commentTextElement: HTMLElement): void {
   }
 
   if (commentTextElement.getAttribute(REPLACED_COMMENT_ATTR) !== 'true') {
-    console.warn('[Time Traveler Hunter] hidden date-play comment:', sourceCommentText);
+    debugLog('hidden date-play comment', sourceCommentText);
   }
 
   commentTextElement.innerText = REPLACEMENT_TEXT;
@@ -165,9 +166,7 @@ function handleMutations(
 }
 
 function logScanSummary(context: string, summary: ProcessSummary): void {
-  console.warn(
-    `[Time Traveler Hunter] ${context} scanned=${summary.totalCount}, hidden=${summary.hiddenCount}`,
-  );
+  debugLog(`${context} scanned=${summary.totalCount}, hidden=${summary.hiddenCount}`);
 }
 
 export function startYouTubeCommentCleaner(

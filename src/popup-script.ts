@@ -8,6 +8,7 @@ import {
   type CommentFilterMode,
   type CommentFilterSettings,
 } from '@/utils/comment-filter-settings';
+import { consumeRuntimeLastError } from '@/utils/debug-logger';
 import { createUpdateFilterSettingsMessage } from '@/utils/filter-settings-message';
 
 const WEAK_MODE_INPUT_ID = 'mode-weak';
@@ -178,7 +179,7 @@ function sendSettingsToActiveTab(settings: CommentFilterSettings): Promise<void>
 
       const message = createUpdateFilterSettingsMessage(settings);
       chrome.tabs.sendMessage(activeTab.id, message, function onMessageSent() {
-        void chrome.runtime?.lastError;
+        consumeRuntimeLastError('popup send message');
         resolve();
       });
     });
