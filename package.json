@@ -1,0 +1,25 @@
+{
+  "name": "time-traveler-hunter",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "fix:imports": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\" --fix",
+    "lint": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\"",
+    "build": "bun run fix:imports && bun run lint && bun build ./src/index.ts --outdir dist",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "latest",
+    "eslint": "^10.0.2",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.56.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
