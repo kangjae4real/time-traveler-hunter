@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "dev": "bun --watch run ./src/index.ts",
     "fix:imports": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\" --fix",
     "lint": "bunx eslint \"src/**/*.{ts,tsx,mts,cts}\"",
     "build": "bun run fix:imports && bun run lint && bun build ./src/index.ts --outdir dist",
