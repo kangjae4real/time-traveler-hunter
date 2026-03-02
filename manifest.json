@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Time Traveler Hunter",
+  "description": "Hide repetitive year-play comments on YouTube.",
+  "version": "0.2.0",
+  "permissions": ["storage", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "js": ["content-script.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
